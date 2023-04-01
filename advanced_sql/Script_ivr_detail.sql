@@ -5,9 +5,9 @@
           ,ivr_calls.ivr_result AS calls_ivr_result 
           ,ivr_calls.vdn_label AS calls_vdn_label 
           ,ivr_calls.start_date AS calls_start_date 
-          ,FORMAT_DATE('%Y%m%d',ivr_calls.start_date) AS calls_start_date_id 
+          ,FORMAT_TIMESTAMP('%Y%m%d',ivr_calls.start_date) AS calls_start_date_id 
           ,ivr_calls.end_date AS calls_end_date 
-          ,FORMAT_DATE('%Y%m%d', ivr_calls.end_date) AS calls_end_date_id 
+          ,FORMAT_TIMESTAMP('%Y%m%d', ivr_calls.end_date) AS calls_end_date_id 
           ,ivr_calls.total_duration AS calls_total_duration 
           ,ivr_calls.customer_segment AS calls_customer_segment 
           ,ivr_calls.ivr_language AS calls_ivr_language 
@@ -27,8 +27,8 @@
           ,ivr_steps.billing_account_id AS billing_account_id
           FROM 
             keepcoding.ivr_calls
-            INNER JOIN keepcoding.ivr_modules 
+            LEFT JOIN keepcoding.ivr_modules 
             ON ivr_calls.ivr_id = ivr_modules.ivr_id
-            INNER JOIN keepcoding.ivr_steps 
+            LEFT JOIN keepcoding.ivr_steps 
             ON ivr_modules.ivr_id = ivr_steps.ivr_id 
             AND ivr_modules.module_sequece = ivr_steps.module_sequece);
